@@ -27,12 +27,13 @@
 
 
       <div class="btn-group" dropdown *ngIf="(accountService.currentUser$ | async) as user">
-        <a id="button-basic" dropdownToggle type="button" class="text-light dropdown-toggle"
+        <img src="{{user.photoUrl}}" alt="{{user.username}}">
+        <a id="button-basic" dropdownToggle type="button" class="text-light dropdown-toggle ml-2"
           aria-controls="dropdown-basic">
           welcome {{user.username | titlecase}} <span class="caret"></span>
         </a>
         <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu mt-3" role="menu" aria-labelledby="button-basic">
-          <li role="menuitem"><a class="dropdown-item">Edit Profile</a></li>
+          <li role="menuitem"><a routerLink="/member/edit" class="dropdown-item">Edit Profile</a></li>
           <li class="divider dropdown-divider"></li>
           <li role="menuitem"><a class="dropdown-item" (click)="logout()">Logout</a></li>
 
