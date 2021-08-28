@@ -42,9 +42,23 @@ export class MembersService {
     return this.userParams;
   }
 
-  addLike(username: string) {
+  addLike(member: any) {
 
-    return this.http.post(this.baseUrl + "likes/" + username, {});
+    let userName = "";
+
+    try {
+      if (member.userName != null) {
+        userName = member.userName;
+      } else {
+        userName = member.username;
+      }
+
+    } catch {
+      userName = member.username;
+    }
+
+
+    return this.http.post(this.baseUrl + "likes/" + userName, {});
   }
 
   getLikes(predicate: string, pageNumber, pageSize) {
@@ -104,7 +118,7 @@ export class MembersService {
 
   getMember(username: string) {
     const member = [...this.memberCache.values()].reduce((arr, elem) => arr.concat(elem.result), [])
-      .find((member: Member) => member.userName === username);
+      .find((member: any) => member.userName === username || member.username === username );
     if (member) {
       return of(member);
     }
