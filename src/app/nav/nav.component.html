@@ -17,8 +17,8 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/admin" routerLinkActive="active">Admin Panel</a>
+          <li *appHasRole='["Admin","Moderator"]' class="nav-item">
+            <a class="nav-link" routerLink="/admin" routerLinkActive="active">Admin</a>
           </li>
         </ng-container>
 
@@ -33,7 +33,7 @@
         <img src="{{user.photoUrl || './assets/user.png'}}" alt="{{user.username}}">
         <a id="button-basic" dropdownToggle type="button" class="text-light dropdown-toggle ml-2"
           aria-controls="dropdown-basic">
-          welcome {{user.knownAs | titlecase}} <span class="caret"></span>
+          welcome {{user.knownAs || user.username | titlecase}} <span class="caret"></span>
         </a>
         <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu mt-3" role="menu" aria-labelledby="button-basic">
           <li role="menuitem"><a routerLink="/member/edit" class="dropdown-item">Edit Profile</a></li>
